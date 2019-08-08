@@ -33,9 +33,9 @@ function run(){
 						this.hits = 0;
 						this.round++;
 					}else if(this.hits == 51){
-						this.lose = ['A real man never shoots more than 50 hogs.', `Real man? I don't know what that even means...`]
+						this.lose = [`A real man only ever shoots 50`, `What does Real Man even mean?`]
 					}else{
-						this.lose = ['The feral hogs got your kids!', 'You have to shoot at least 30 each round'];
+						this.lose = ['The feral hogs got your kids!', 'You have to shoot at least 30!'];
 					}
 				}
 				
@@ -43,7 +43,7 @@ function run(){
 			}
 			
 			if(Dad.health <= 0){
-				this.lose = [ 'The hogs killed you!', 'Maybe the feral hogs just swallowed you whole...' ];
+				this.lose = [ 'The hogs killed you!', 'They just swallowed you whole' ];
 			}
 			
 			if(this.lose !== false){
@@ -106,10 +106,25 @@ function run(){
 				text('   TO RELOAD   ', S().size[1] / 2, 16, 8);
 			}
 			
+			if(this.lose !== false){
+				// Failure message
+				D().fillStyle = '#000';
+				D().fillRect(6 * S().zoom, 6 * S().zoom, (256 - 12) * S().zoom, 20 * S().zoom);
+				text(this.lose[0], 8, 8, 8);
+				text(this.lose[1], 8, 16, 8);
+				
+				if(this.loseCanClick++ >= this.loseCanClickLimit){
+					D().fillStyle = '#000';
+					D().fillRect(((S().size[1] - 4) / 2) * S().zoom, 62 * S().zoom, 124 * S().zoom, 20 * S().zoom);
+					text(`Kills: ${this.hitsTotal}`, S().size[1] / 2, 64, 8);
+					text('Shoot To Retry', S().size[1] / 2, 72, 8);
+				}
+			}
+			
 			text(`CLIP: ${Dad.clip}`, 1, S().size[1] - 17, 8);
 			text(`AMMO: ${Dad.ammo}`, 1, S().size[1] - 8, 8);
 			text(`ROUND ${this.round}`, S().size[0] - 160, S().size[1] - 17, 8);
-			text(`KILLS: ${this.hits}`, S().size[0] - 160, S().size[1] - 8, 8);
+			text(`KILLS: ${this.hitsTotal}`, S().size[0] - 160, S().size[1] - 8, 8);
 			
 			for(let i = 0; i < Dad.health; i++){
 				D().drawImage(
