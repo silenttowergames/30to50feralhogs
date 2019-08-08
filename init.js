@@ -129,6 +129,7 @@ function draw(){
 			D().fillRect(44 * S().zoom, 44 * S().zoom, 182 * S().zoom, 39 * S().zoom);
 			text('HOG ASSAULT', 48, 48, 16, '#FFF');
 			text('    Click to Start', 48, 72, 8, '#FFF');
+			text('Made by Silent Tower Games', 2, S().size[1] - 12, 8);
 		}else{
 			text(intro.text, 64, S().size[1] - 12, 8);
 		}
