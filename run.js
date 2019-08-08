@@ -10,14 +10,29 @@ function run(){
 		
 		round: 1,
 		
-		timer: 0,
+		timer: -120,
+		timerInit: -120,
+		
+		postRoundTimer: 120,
+		postRoundTimerLimit: 120,
 		
 		step: function(){
 			if(this.hogs >= this.hogLimit){
+				if(this.postRoundTimer-- <= 0){
+					this.postRoundTimer = this.postRoundTimerLimit;
+					this.timer = this.timerInit;
+					this.hogs = 0;
+					this.round++;
+				}
+				
 				return;
 			}
 			
 			this.timer++;
+			
+			if(this.timer < 0){
+				return;
+			}
 			
 			if(this.timer % 30 == 0){
 				if(this.hogs < (this.hogLimit - 2) && Math.random() * 10 < 1){
@@ -37,6 +52,12 @@ function run(){
 		},
 		
 		hud: function(){
+			if(this.timer < 0){
+				D().fillStyle = '#000';
+				D().fillRect(((S().size[1] - 4) / 2) * S().zoom, 6 * S().zoom, 124 * S().zoom, 10 * S().zoom);
+				text(`ROUND ${this.round}`, S().size[1] / 2, 8, 8);
+			}
+			
 			if(Dad.clip <= 5){
 				D().fillStyle = '#000';
 				D().fillRect(((S().size[1] - 4) / 2) * S().zoom, 6 * S().zoom, 124 * S().zoom, 20 * S().zoom);

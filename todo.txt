@@ -1,0 +1,16 @@
+endings
+- death
+- out of ammo
+- shoot 51 hogs
+
+sfx
+- death noise
+- "round X" noise
+- game over noise
+
+music
+- play music
+- title theme
+
+hogs
+- randomize number of hogs
