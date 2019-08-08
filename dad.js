@@ -27,12 +27,17 @@ const Dad = {
 		}
 		
 		if(started){
-			this.pos = [
-				S().size[0] - 54 - 16,
-				S().size[1] - 60
-			];
+			if(Run.lose === false){
+				this.pos = [
+					S().size[0] - 54 - 16,
+					S().size[1] - 60
+				];
+			}else{
+				this.pos[0] += 0.25;
+				this.pos[1] += 1;
+			}
 		}else{
-			if(this.pos[1] == S().size[1] - 60){
+			if(this.pos[1] == S().size[1] - 60 || intro.timer[0] === false){
 				this.pos = [
 					S().size[0] - 54 - 16,
 					S().size[1] + 32

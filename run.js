@@ -20,9 +20,13 @@ function run(){
 		lose: false,
 		
 		loseCanClick: 0,
-		loseCanClickLimit: 120,
+		loseCanClickLimit: 240,
 		
 		step: function(){
+			if(Dad.ammo <= 0 && Dad.clip <= 0){
+				this.lose = ['You ran out of bullets!', 'Ammo laws only allow so much'];
+			}
+			
 			if(this.hogs >= this.hogLimit){
 				if(this.postRoundTimer-- <= 0){
 					if(this.hits >= 30 && this.hits <= 50){
@@ -33,13 +37,11 @@ function run(){
 						this.hits = 0;
 						this.round++;
 					}else if(this.hits == 51){
-						this.lose = [`A real man only ever shoots 50`, `What does Real Man even mean?`]
+						this.lose = [`A real man only ever shoots 50`, "Don't you wanna be a real man?"];
 					}else{
 						this.lose = ['The feral hogs got your kids!', 'You have to shoot at least 30!'];
 					}
 				}
-				
-				return;
 			}
 			
 			if(Dad.health <= 0){
@@ -54,6 +56,10 @@ function run(){
 					S().dragging = false;
 					Son = SonKid();
 					Daughter = DaughterKid();
+					Dad.health = Dad.healthLimit;
+					Dad.clip = Dad.clipLimit;
+					Dad.ammo = Dad.ammoLimit;
+					hogs = [];
 				}
 				
 				return;

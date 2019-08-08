@@ -178,4 +178,4 @@ function hoglet(y){
 	return ret;
 }
 
-const hogs = [];
+let hogs = [];
