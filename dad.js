@@ -32,6 +32,13 @@ const Dad = {
 				S().size[1] - 60
 			];
 		}else{
+			if(this.pos[1] == S().size[1] - 60){
+				this.pos = [
+					S().size[0] - 54 - 16,
+					S().size[1] + 32
+				];
+			}
+			
 			if(intro.timer[0] !== false){
 				this.pos[1] -= 0.4;
 			}

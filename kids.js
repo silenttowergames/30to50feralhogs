@@ -40,7 +40,7 @@ function DaughterKid(){
 	return ret;
 }
 
-const
+let
 	Son = SonKid(),
 	Daughter = DaughterKid()
 ;

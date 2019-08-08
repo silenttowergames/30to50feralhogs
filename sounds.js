@@ -53,6 +53,6 @@ function euler(n){
 
 function initSounds(){
 	volume('master', 0.75);
-	volume('music', 0.75);
+	volume('music', 1);
 	volume('sfx', 1);
 }

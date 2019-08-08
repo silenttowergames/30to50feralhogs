@@ -17,6 +17,7 @@ function hogStep(){
 			shot[0] < hog.pos[0] + hog.width && shot[1] < hog.pos[1] + hog.height
 		){
 			Run.hits++;
+			Run.hitsTotal++;
 			hog.dead = true;
 			hog.deadTimer = hog.deadTimerLimit;
 			setTimeout(() => sound('hit.wav').play(), (1000 / 60) * 5);

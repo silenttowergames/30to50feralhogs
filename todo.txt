@@ -11,6 +11,3 @@ sfx
 music
 - play music
 - title theme
-
-hogs
-- randomize number of hogs

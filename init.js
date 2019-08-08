@@ -11,11 +11,16 @@ window.addEventListener('load', function(){
 
 const intro = {
 	text: '"Run, kids!"',
-	timer: [ false, 200, ],
+	timer: [ false, 200, 10, 10 ],
 };
 let started = false;
 
 function step(){
+	if(S().deleteRun){
+		S().deleteRun = undefined;
+		Run = false;
+	}
+	
 	if(S().screenShakeTimer > 0){
 		S().screenShakeTimer--;
 		S().screenShakePos = [(Math.random() * 2) - 1, (Math.random() * 2) - 1];
@@ -23,10 +28,13 @@ function step(){
 	
 	if(!started){
 		if(intro.timer[0] === false){
-			if(S().dragging){
+			if(S().dragging && intro.timer[2] >= intro.timer[3]){
 				intro.timer[0] = intro.timer[1];
 				sound('rumbling.wav').play();
 				S().screenShakeTimer = 150;
+				intro.timer[2] = 0;
+			}else if(intro.timer[2] < intro.timer[3]){
+				intro.timer[2]++;
 			}
 		}else{
 			if(intro.timer[0]-- <= 0){
@@ -52,11 +60,6 @@ function step(){
 		reload();
 	}else if(S().dragging && S().shootTimer == 0){
 		shoot();
-	}
-	
-	if(S().draggingDelay === false){
-		S().dragging = false;
-		S().draggingDelay = undefined;
 	}
 	
 	if(Run){
@@ -124,4 +127,9 @@ function draw(){
 	
 	// Reset shot now
 	S().shot = false;
+	
+	if(S().draggingDelay === false){
+		S().dragging = false;
+		S().draggingDelay = undefined;
+	}
 }
