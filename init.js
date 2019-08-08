@@ -26,6 +26,14 @@ function step(){
 		S().screenShakePos = [(Math.random() * 2) - 1, (Math.random() * 2) - 1];
 	}
 	
+	if(sound('song.ogg')._sounds[0]._paused == (metric = (started && Run.lose === false))){
+		sound('song.ogg')[metric ? 'play' : 'stop']();
+	}
+	
+	if(sound('title.ogg')._sounds[0]._paused == (metric = (!started && intro.timer[0] === false))){
+		sound('title.ogg')[metric ? 'play' : 'stop']();
+	}
+	
 	if(!started){
 		if(intro.timer[0] === false){
 			if(S().dragging && intro.timer[2] >= intro.timer[3]){

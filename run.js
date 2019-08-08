@@ -23,29 +23,34 @@ function run(){
 		loseCanClickLimit: 240,
 		
 		step: function(){
-			if(Dad.ammo <= 0 && Dad.clip <= 0){
+			if(this.lose === false && Dad.ammo <= 0 && Dad.clip <= 0){
 				this.lose = ['You ran out of bullets!', 'Ammo laws only allow so much'];
+				sound('death.wav').play();
 			}
 			
 			if(this.hogs >= this.hogLimit){
 				if(this.postRoundTimer-- <= 0){
-					if(this.hits >= 30 && this.hits <= 50){
+					if(this.lose === false && this.hits >= 30 && this.hits <= 50){
 						this.postRoundTimer = this.postRoundTimerLimit;
 						this.timer = this.timerInit;
 						this.hogs = 0;
 						Dad.ammo += this.hits;
 						this.hits = 0;
 						this.round++;
-					}else if(this.hits == 51){
+						sound('round.wav').play();
+					}else if(this.hits == 51 && this.lose === false){
 						this.lose = [`A real man only ever shoots 50`, "Don't you wanna be a real man?"];
-					}else{
+						sound('death.wav').play();
+					}else if(this.lose === false && this.hits < 30){
 						this.lose = ['The feral hogs got your kids!', 'You have to shoot at least 30!'];
+						sound('death.wav').play();
 					}
 				}
 			}
 			
-			if(Dad.health <= 0){
+			if(Dad.health <= 0 && this.lose === false){
 				this.lose = [ 'The hogs killed you!', 'They just swallowed you whole' ];
+				sound('death.wav').play();
 			}
 			
 			if(this.lose !== false){
@@ -67,7 +72,7 @@ function run(){
 			
 			this.timer++;
 			
-			if(this.timer < 0){
+			if(this.timer < 0 || this.hogs >= this.hogLimit){
 				return;
 			}
 			
@@ -100,24 +105,23 @@ function run(){
 		hud: function(){
 			if(this.timer < 0){
 				D().fillStyle = '#000';
-				D().fillRect(102 * S().zoom, 6 * S().zoom, 67 * S().zoom, 11 * S().zoom);
-				text(`ROUND ${this.round < 10 ? ' ' : ''}${this.round}`, 104, 8, 8);
+				D().fillRect(102 * S().zoom, 8 * S().zoom, 67 * S().zoom, 11 * S().zoom);
+				text(`ROUND ${this.round < 10 ? ' ' : ''}${this.round}`, 104, 10, 8);
 			}
 			
 			if(Dad.clip <= 5){
 				D().fillStyle = '#000';
-				D().fillRect(((S().size[1] - 4) / 2) * S().zoom, 6 * S().zoom, 124 * S().zoom, 20 * S().zoom);
-				//text('SHOOT  YOURSELF', S().size[1] / 2, 8, 8);
-				text('   CLICK GUN   ', S().size[1] / 2, 8, 8);
-				text('   TO RELOAD   ', S().size[1] / 2, 16, 8);
+				D().fillRect(((S().size[1] - 4) / 2) * S().zoom, 8 * S().zoom, 124 * S().zoom, 20 * S().zoom);
+				text('   CLICK GUN   ', S().size[1] / 2, 10, 8);
+				text('   TO RELOAD   ', S().size[1] / 2, 18, 8);
 			}
 			
 			if(this.lose !== false){
 				// Failure message
 				D().fillStyle = '#000';
-				D().fillRect(6 * S().zoom, 6 * S().zoom, (256 - 12) * S().zoom, 20 * S().zoom);
-				text(this.lose[0], 8, 8, 8);
-				text(this.lose[1], 8, 16, 8);
+				D().fillRect(6 * S().zoom, 8 * S().zoom, (256 - 12) * S().zoom, 20 * S().zoom);
+				text(this.lose[0], 8, 10, 8);
+				text(this.lose[1], 8, 18, 8);
 				
 				if(this.loseCanClick++ >= this.loseCanClickLimit){
 					D().fillStyle = '#000';

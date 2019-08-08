@@ -23,10 +23,13 @@ function loadSounds(){
 	
 	sound('hit.wav', 'sfx');
 	sound('hurt.wav', 'sfx');
+	sound('death.wav', 'sfx');
+	sound('round.wav', 'sfx');
 	
 	sound('rumbling.wav', 'sfx');
 	
 	sound('song.ogg', 'music');
+	sound('title.ogg', 'music');
 }
 
 function shootSFX(){
