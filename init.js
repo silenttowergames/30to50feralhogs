@@ -17,7 +17,9 @@ function step(){
 		S().shootTimer--;
 	}
 	
-	if(S().dragging && S().shootTimer == 0){
+	if(S().dragging && MPos.X > S().size[0] - 70 & MPos.Y > S().size[1] - 60){
+		reload();
+	}else if(S().dragging && S().shootTimer == 0){
 		shoot();
 	}
 	
@@ -25,6 +27,13 @@ function step(){
 		S().dragging = false;
 		S().draggingDelay = undefined;
 	}
+	
+	if(Run){
+		Run.step();
+	}
+	
+	Dad.step();
+	hogStep();
 }
 
 function draw(){
@@ -40,7 +49,7 @@ function draw(){
 		0,
 		0,
 		S().size[0] * S().zoom,
-		S().size[1] * S().zoom
+		(S().size[1] - 16) * S().zoom
 	);
 	
 	D().drawImage(
@@ -48,8 +57,10 @@ function draw(){
 		shakeX() * S().zoom,
 		shakeY() * S().zoom,
 		S().size[0] * S().zoom,
-		S().size[1] * S().zoom
+		(S().size[1] - 16) * S().zoom
 	);
+	
+	hogDraw();
 	
 	if(S().drawShots){
 		D().fillStyle = '#FF00FF';
@@ -63,5 +74,14 @@ function draw(){
 		}
 	}
 	
-	text('Test', 8, 8, 16);
+	D().fillStyle = '#000';
+	D().fillRect(0, (S().size[1] - 18) * S().zoom, S().size[0] * S().zoom, 18 * S().zoom);
+	
+	if(Run){
+		Run.hud();
+	}
+	
+	Dad.draw();
+	
+	S().shot = false;
 }

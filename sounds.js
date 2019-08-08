@@ -17,6 +17,8 @@ function loadSounds(){
 	sound('shoot2.wav', 'sfx');
 	sound('shoot3.wav', 'sfx');
 	
+	sound('noammo.wav', 'sfx');
+	
 	sound('hit.wav', 'sfx');
 	sound('hurt.wav', 'sfx');
 	

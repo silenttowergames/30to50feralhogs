@@ -42,27 +42,6 @@ function touchHandler(e){
 	MPos.Y = pos[1];
 }
 
-function shoot(x, y){
-	if(S().shootTimer > 0){
-		return;
-	}
-	
-	if(x === undefined || y === undefined){
-		x = MPos.X;
-		y = MPos.Y;
-	}
-	
-	shootSFX();
-	
-	S().shootTimer = S().shootTimerLimit;
-	
-	if(S().screenShakeTimer <= 0){
-		S().screenShakeTimer = S().screenShakeTimerLimit;
-	}
-	
-	addDot(x, y);
-}
-
 const dots = [];
 function addDot(x, y){
 	dots.push([x, y]);

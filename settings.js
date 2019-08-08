@@ -2,15 +2,17 @@ const Settings = {
 	drawShots: false,
 	
 	fps: 60,
-	size: [256, 128],
+	size: [256, 144],
 	
 	shootTimer: 0,
-	shootTimerLimit: 20,
+	shootTimerLimit: 10,
 	
 	screenShake: [0, 0],
 	screenShakeTimer: 0,
 	screenShakeTimerLimit: 5,
 	screenShakePos: [0, 0],
+	
+	shot: false,
 	
 	volume: {
 		master: 0,
