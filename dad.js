@@ -12,6 +12,11 @@ const Dad = {
 	health: 3,
 	healthLimit: 3,
 	
+	pos: [
+		S().size[0] - 54 - 16,
+		S().size[1] + 32
+	],
+	
 	step: function(){
 		if(this.reload > 0){
 			this.reload--;
@@ -19,6 +24,17 @@ const Dad = {
 		
 		if(this.shake > 0){
 			this.shake--;
+		}
+		
+		if(started){
+			this.pos = [
+				S().size[0] - 54 - 16,
+				S().size[1] - 60
+			];
+		}else{
+			if(intro.timer[0] !== false){
+				this.pos[1] -= 0.4;
+			}
 		}
 	},
 	
@@ -48,8 +64,8 @@ const Dad = {
 		
 		D().drawImage(
 			img('dad.png'),
-			(S().size[0] - 54 - 16 + shakeX) * S().zoom,
-			(S().size[1] - 60 + shakeY) * S().zoom,
+			(this.pos[0] + shakeX) * S().zoom,
+			(this.pos[1] + shakeY) * S().zoom,
 			54 * S().zoom,
 			60 * S().zoom
 		);

@@ -1,8 +1,10 @@
-let Run = new run();
+let Run = false;
 
 function run(){
 	return {
 		hogs: 0,
+		hogLimit: 51,
+		
 		hits: 0,
 		hp: 3,
 		
@@ -11,14 +13,20 @@ function run(){
 		timer: 0,
 		
 		step: function(){
-			if(this.hogs >= 51){
+			if(this.hogs >= this.hogLimit){
 				return;
 			}
 			
 			this.timer++;
 			
 			if(this.timer % 30 == 0){
-				if(Math.random() * 10 < 1){
+				if(this.hogs < (this.hogLimit - 2) && Math.random() * 10 < 1){
+					for(let i = 0; i < 2; i++){
+						hogs.push(new hoglet(30 + (20 * (i + 1))));
+					}
+					
+					this.hogs += 1;
+				}else if(Math.random() * 10 < 1){
 					hogs.push(new redHog());
 				}else{
 					hogs.push(new hog());
@@ -32,8 +40,9 @@ function run(){
 			if(Dad.clip <= 5){
 				D().fillStyle = '#000';
 				D().fillRect(((S().size[1] - 4) / 2) * S().zoom, 6 * S().zoom, 124 * S().zoom, 20 * S().zoom);
-				text('SHOOT  YOURSELF', S().size[1] / 2, 8, 8);
-				text('   TO RELOAD', S().size[1] / 2, 16, 8);
+				//text('SHOOT  YOURSELF', S().size[1] / 2, 8, 8);
+				text('   CLICK GUN   ', S().size[1] / 2, 8, 8);
+				text('   TO RELOAD   ', S().size[1] / 2, 16, 8);
 			}
 			
 			text(`CLIP: ${Dad.clip}`, 1, S().size[1] - 17, 8);

@@ -36,6 +36,8 @@ function reload(){
 		return;
 	}
 	
+	sound('reload.wav').play();
+	
 	Dad.reload = Dad.reloadLimit;
 	
 	let take = Math.min(Dad.clipLimit - Dad.clip, Dad.ammo);

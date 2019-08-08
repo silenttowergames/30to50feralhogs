@@ -17,10 +17,14 @@ function loadSounds(){
 	sound('shoot2.wav', 'sfx');
 	sound('shoot3.wav', 'sfx');
 	
+	sound('reload.wav', 'sfx');
+	
 	sound('noammo.wav', 'sfx');
 	
 	sound('hit.wav', 'sfx');
 	sound('hurt.wav', 'sfx');
+	
+	sound('rumbling.wav', 'sfx');
 	
 	sound('song.ogg', 'music');
 }

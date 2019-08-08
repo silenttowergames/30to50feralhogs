@@ -20,6 +20,7 @@ function hogStep(){
 			hog.dead = true;
 			hog.deadTimer = hog.deadTimerLimit;
 			setTimeout(() => sound('hit.wav').play(), (1000 / 60) * 5);
+			S().shot = false;
 		}
 		
 		if(hog.remove){
@@ -44,6 +45,11 @@ function hog(){
 	const ret = {
 		pos: [ -64, 64 ],
 		posYinit: 0,
+		
+		img: 'hogs',
+		runFrames: 3,
+		deathFrame: 3,
+		runFramePadding: 0,
 		
 		width: 36,
 		height: 20,
@@ -86,20 +92,20 @@ function hog(){
 			}
 			
 			const
-				frame = this.dead ? 3 : Math.max(0, Math.round((this.pos[0] + 64) / (S().size[0] / 30)) % 3),
+				frame = this.dead ? this.deathFrame : Math.max(0, Math.round((this.pos[0] + 64) / (S().size[0] / 30)) % this.runFrames) + this.runFramePadding,
 				frameY = this.redHog
 			;
 			
 			D().drawImage(
-				img('hogs.png'),
-				1 + (frame * 36),
+				img(`${this.img}.png`),
+				1 + (frame * (this.width + 1)),
 				1 + (frameY ? 20 : 0),
-				35,
-				20,
+				this.width,
+				this.height,
 				(this.pos[0] + shakeX()) * S().zoom,
 				(this.pos[1] + shakeY()) * S().zoom,
-				35 * S().zoom,
-				20 * S().zoom
+				this.width * S().zoom,
+				this.height * S().zoom
 			);
 		},
 	};
@@ -149,6 +155,24 @@ function redHog(){
 			}
 		}
 	};
+	
+	return ret;
+}
+
+function hoglet(y){
+	const ret = hog();
+	
+	ret.pos[1] = ret.posYinit = y;
+	
+	ret.width = 14;
+	ret.height = 10;
+	ret.runFrames = 2;
+	ret.deathFrame = 0;
+	ret.runFramePadding = 1;
+	ret.velocity = 1;
+	ret.img = 'hoglet';
+	
+	ret.div = 0;
 	
 	return ret;
 }
