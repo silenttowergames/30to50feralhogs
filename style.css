@@ -19,3 +19,31 @@ canvas {
 img {
 	display: none;
 }
+
+section {
+	align-items: center;
+	background-color: #000;
+	color: #FFF;
+	display: flex;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+}
+
+section > div {
+	font-family: 'PressStart2P';
+	flex-grow: 1;
+	font-size: 20px;
+	line-height: 1.5em;
+	margin: auto;
+	max-width: 800px;
+	text-align: center;
+}
+
+section > div > button {
+	font: inherit;
+	margin: auto;
+	padding: 0.5em;
+	text-transform: uppercase;
+}

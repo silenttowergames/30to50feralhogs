@@ -18,7 +18,7 @@
 <script type="text/javascript" src="run.js"></script>
 <script type="text/javascript" src="init.js"></script>
 </head>
-<body>
+<body onload="document.getElementById('theButton').style.display = 'block';">
 <canvas id="c"></canvas>
 <img src="dad.png" alt="">
 <img src="kids.png" alt="">
@@ -26,5 +26,14 @@
 <img src="hogs.png" alt="">
 <img src="hoglet.png" alt="">
 <img src="backdrop_mockup.png" alt="">
+
+<section id="warning">
+	<div>
+		<h1>Content Notice</h1>
+		<p>This game contains satirical, but somewhat realistic, depictions of violence.</p>
+		<p>It might be a little heavy!</p>
+		<button style="display: none;" id="theButton" onclick="document.getElementById('warning').remove(); start();">Okay</button>
+	</div>
+</section>
 </body>
 </html>

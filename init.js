@@ -1,13 +1,17 @@
 window.addEventListener('contextmenu', event => event.preventDefault());
 
 window.addEventListener('load', function(){
+	
+});
+
+function start(){
 	resize();
 	touchEvents();
 	loadSounds();
 	initSounds();
 	
 	S().gameInterval = setInterval(() => { step(); draw(); }, 1000 / S().fps);
-});
+}
 
 const intro = {
 	text: '"Run, kids!"',
